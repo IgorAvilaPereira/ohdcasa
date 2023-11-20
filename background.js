@@ -15,16 +15,29 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#btn1").addEventListener("click", async function () {
-      alert("ok");    
-      
-      /*
-      const response = await fetch("/")
-      const json = await response.json()
-      document.querySelector("#div_clientes").innerHTML = ""
-      json.forEach(({ id, nome }) => {
-          document.querySelector("#div_clientes").innerHTML += `<button class="btn btn-danger" onclick='editar(${id})'>Editar</button> <button class="btn btn-danger" onclick='deletar(${id})'>Deletar  </button> ${nome} <br>`;
-      });*/
-  
+    // document.addEventListener("load", async function () {
+
+    // alert("ok");         
+    const response = await fetch("https://ohdcasa.com.br/collections/destaques", {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/text' }
+    });
+    const html = await response.text()
+    // document.querySelector("#conteudo_extensao").innerHTML = html;   
+    
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(html, 'text/html');
+    var produtos = doc.getElementsByClassName("product-item__primary-image lazyload image--fade-in");   
+    for (let index = 0; index < produtos.length; index++) {
+       document.querySelector("#conteudo_extensao").innerHTML += produtos[index].alt + "<br><br>";
+    }
+    // var produtos = doc.getElementsByClassName("product-item__title text--strong link");
+    // var precos = doc.getElementsByClassName("price price--highlight");
+    // // <button id="btn1">Buscar</button>
+    // for (let index = 0; index < produtos.length; index++) {
+    //   document.querySelector("#conteudo_extensao").innerHTML += produtos[index].innerText + ":" + precos[index].innerText + "<br><br>";
+    // }
+    
     // (async () => {
     //   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     //   chrome.scripting.executeScript({
