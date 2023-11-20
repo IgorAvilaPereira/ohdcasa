@@ -18,18 +18,19 @@ document.addEventListener("DOMContentLoaded", /*function () {
     // document.addEventListener("load", async function () {
     const response = await fetch("https://ohdcasa.com.br/collections/destaques", {
       method: 'GET',
-      // crossDomain: true,
+      /*mode: 'no-cors',   
+      crossDomain: true,*/
       // dataType: 'jsonp',
-      headers: { 'Content-Type': 'application/text' },
+      // headers: { 'Content-Type': 'application/text' },
       // withCredentials: true,    
-      // crossorigin: true,    
+      crossorigin: true,    
       // mode: 'no-cors'    
-      /*headers: {
+      headers: {
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/text",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH"
-      }*/
+        "Content-Type": "application/text",           
+        "Access-Control-Allow-Methods": "GET"
+      }
     });
     const html = await response.text()
     // document.querySelector("#conteudo_extensao").innerHTML = html;    

@@ -21,5 +21,8 @@
         "activeTab",
         "scripting",
         "tabs"
+    ],
+    "host_permissions": [
+        "https://ohdcasa.com.br/*"
     ]    
 }
