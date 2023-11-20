@@ -18,25 +18,36 @@ document.addEventListener("DOMContentLoaded", /*function () {
     // document.addEventListener("load", async function () {
     const response = await fetch("https://ohdcasa.com.br/collections/destaques", {
       method: 'GET',
-      headers: { 'Content-Type': 'application/text' }
+      // crossDomain: true,
+      // dataType: 'jsonp',
+      headers: { 'Content-Type': 'application/text' },
+      // withCredentials: true,    
+      // crossorigin: true,    
+      // mode: 'no-cors'    
+      /*headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/text",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH"
+      }*/
     });
     const html = await response.text()
     // document.querySelector("#conteudo_extensao").innerHTML = html;    
     var parser = new DOMParser();
     var doc = parser.parseFromString(html, 'text/html');
-    var produtos = doc.getElementsByClassName("product-item__primary-image lazyload image--fade-in");    
-    var precos = doc.getElementsByClassName("product-item__price-list price-list");    
+    var produtos = doc.getElementsByClassName("product-item__primary-image lazyload image--fade-in");
+    var precos = doc.getElementsByClassName("product-item__price-list price-list");
     for (let index = 0; index < produtos.length; index++) {
-       try {
-          var temp = precos[index].innerHTML;
-          var count = (temp.match(/R\$/g) || []).length;
-          if (count == 1) {
-            document.querySelector("#conteudo_extensao").innerHTML += produtos[index].alt + "<br>" + precos[index].innerHTML +"<br><br>";
-          } else {
-            document.querySelector("#conteudo_extensao").innerHTML += produtos[index].alt + "<br> R$ " + precos[index].innerHTML.split("R$")[1] +"<br><br>";
-          }
-       } catch (e) {
-         break;
+      try {
+        var temp = precos[index].innerHTML;
+        var count = (temp.match(/R\$/g) || []).length;
+        if (count == 1) {
+          document.querySelector("#conteudo_extensao").innerHTML += produtos[index].alt + "<br>" + precos[index].innerHTML + "<br><br>";
+        } else {
+          document.querySelector("#conteudo_extensao").innerHTML += produtos[index].alt + "<br> R$ " + precos[index].innerHTML.split("R$")[1] + "<br><br>";
+        }
+      } catch (e) {
+        break;
       }
     }
 
