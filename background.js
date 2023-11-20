@@ -13,11 +13,9 @@
 //   newpopupWindow.document.write(document.querySelector("#form > fieldset > div:nth-child(3)").innerText + "<br><br>"+ resultado);  
 // }
 
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelector("#btn1").addEventListener("click", async function () {
+document.addEventListener("DOMContentLoaded", /*function () {
+  document.querySelector("#btn1").addEventListener("click",*/ async function () {
     // document.addEventListener("load", async function () {
-
-    // alert("ok");         
     const response = await fetch("https://ohdcasa.com.br/collections/destaques", {
       method: 'GET',
       headers: { 'Content-Type': 'application/text' }
@@ -58,4 +56,4 @@ document.addEventListener("DOMContentLoaded", function () {
     //   });
     // })()
   });
-});   
+// });   
